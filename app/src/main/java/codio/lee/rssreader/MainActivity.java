@@ -8,8 +8,8 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
-    //private String finalUrl="http://kamala-maniva.box.preview.codiodev.com/first.xml";
-    private String finalUrl="https://damask-pokunt.codio.io/new.xml";
+    private String finalUrl="http://kamala-maniva.box.preview.codiodev.com/first.xml";
+    //private String finalUrl="https://damask-pokunt.codio.io/new.xml";
     private HandleXML obj;
     private EditText title,link,description;
 
