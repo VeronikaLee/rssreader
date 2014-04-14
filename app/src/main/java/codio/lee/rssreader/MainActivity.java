@@ -12,9 +12,9 @@ import codio.lee.rssreader.Constants.DlgType;
 public class MainActivity extends Activity {
 
     //private String finalUrl="http://kamala-maniva.box.preview.codiodev.com/first.xml";
-    private String finalUrl="https://damask-pokunt.codio.io/new.xml";
+    private String finalUrl = "https://damask-pokunt.codio.io/new.xml";
     private HandleXML obj;
-    private EditText title,link,description,quantity;
+    private EditText title, link, description, quantity;
     private AsyncWorker bgTask;
 
     @Override
@@ -25,10 +25,10 @@ public class MainActivity extends Activity {
     }
 
     protected void initComponents(){
-        title = (EditText)findViewById(R.id.editText1);
-        quantity = (EditText)findViewById(R.id.editText0);
-        link = (EditText)findViewById(R.id.editText2);
-        description = (EditText)findViewById(R.id.editText3);
+        title = (EditText) findViewById(R.id.editText1);
+        quantity = (EditText) findViewById(R.id.editText0);
+        link = (EditText) findViewById(R.id.editText2);
+        description = (EditText) findViewById(R.id.editText3);
     }
 
     @Override
@@ -53,6 +53,8 @@ public class MainActivity extends Activity {
         quantity.setText(obj.getQuantity());
         link.setText(obj.getLink());
         description.setText(obj.getDescription());
+        //--подумать
+
     }
     protected final void onPause() {
 
