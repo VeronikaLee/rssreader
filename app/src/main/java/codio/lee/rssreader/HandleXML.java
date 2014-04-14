@@ -15,6 +15,7 @@ import android.util.Log;
 public class HandleXML {
 
     private String title = "title";
+    private String quantity = "quantity";
     private String link = "link";
     private String description = "description";
 
@@ -26,6 +27,9 @@ public class HandleXML {
     }
     public String getTitle(){
         return title;
+    }
+    public String getQuantity(){
+        return quantity;
     }
     public String getLink(){
         return link;
@@ -50,6 +54,9 @@ public class HandleXML {
                         if(name.equals("title")){
                             title = text;
                         }
+                        else if(name.equals("quantity")){
+                            quantity = text;
+                        }
                         else if(name.equals("link")){
                             link = text;
                         }
@@ -65,6 +72,7 @@ public class HandleXML {
             parsingComplete = false;
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d("Main activity", "Data is wrong, sorry, bud");
         }
     }
     public void fetchXML(){
@@ -74,23 +82,42 @@ public class HandleXML {
                 try {
                     URL url = new URL(urlString);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setReadTimeout(10000 /* milliseconds */);
-                    conn.setConnectTimeout(15000 /* milliseconds */);
-                    conn.setRequestMethod("GET");
-                    conn.setDoInput(true);
-                    // Starts the query
-                    conn.connect();
+                    setConnection(conn);
                     InputStream stream = conn.getInputStream();
-                    xmlFactoryObject = XmlPullParserFactory.newInstance();
-                    XmlPullParser myparser = xmlFactoryObject.newPullParser();
-                    myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-                    myparser.setInput(stream, null);
-                    parseXMLAndStoreIt(myparser);
+                    parseNow(stream);
                     stream.close();
                 } catch (Exception e) {
+                    Log.d("Main activity", "Having problems");
                 }
             }
         });
         thread.start();
+    }
+
+    private void setConnection(HttpURLConnection conn) {
+        try{
+            conn.setReadTimeout(10000 /* milliseconds */);
+            conn.setConnectTimeout(15000 /* milliseconds */);
+            conn.setRequestMethod("GET");
+            conn.setDoInput(true);
+            // Starts the query
+            conn.connect();
+        }
+        catch (Exception e) {
+            Log.d("Main activity", "Connection problem, bud");
+        }
+    }
+
+    private void parseNow(InputStream stream) {
+        try{
+            xmlFactoryObject = XmlPullParserFactory.newInstance();
+            XmlPullParser myParser = xmlFactoryObject.newPullParser();
+            myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            myParser.setInput(stream, null);
+            parseXMLAndStoreIt(myParser);
+
+        } catch (Exception e) {
+            Log.d("Main activity", "Parsing problem, bud");
+        }
     }
 }
