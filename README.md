@@ -25,3 +25,15 @@ List of items
 - List item1
 - 2
 - 3
+
+### h3 Heading before list
+- List item1
+- 2
+- 3
+
+### h3 Heading before text
+bla
+bla
+blabla
+
+
